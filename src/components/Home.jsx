@@ -36,7 +36,7 @@ function Home({ recipes, deleteRecipe, editRecipe }) {
       <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'flex-start', height: '100vh', padding: '40px' }}>
         {/* Left section */}
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', flex: 1, padding: '50px' }}>
-          <img src="/src/assets/title.svg" alt="Title" style={{ width: 'auto', height: 'auto' }} />
+          <img src="src\assets\logo.png" alt="Title" style={{ width: 'auto', height: 'auto' }} />
 
           {/* Search bar and Create Button */}
           <div className="search-create-bar" style={{ display: 'flex', gap: '20px', justifyContent: 'center', marginTop: '50px', width: '60%' }}>
