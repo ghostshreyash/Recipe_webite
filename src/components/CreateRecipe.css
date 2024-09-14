@@ -2,7 +2,7 @@
     max-width: 700px;
     margin: 40px auto;
     padding: 30px;
-    background-color: #fff8e1; /* Light background color */
+    background-color: #fff8e1; 
     border-radius: 15px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     font-family: 'Arial', sans-serif;
@@ -10,7 +10,7 @@
   
   .recipe-form h2 {
     text-align: center;
-    color: #d45b0a; /* Theme color for headings */
+    color: #d45b0a; 
     font-size: 2rem;
     margin-bottom: 20px;
   }
@@ -38,7 +38,7 @@
   .form-input:focus,
   .form-textarea:focus,
   .form-quill:focus {
-    border-color: #d45b0a; /* Border color matching the theme */
+    border-color: #d45b0a; 
   }
   
   .form-textarea {
@@ -51,7 +51,7 @@
     width: 100%;
     padding: 12px;
     font-size: 1.2rem;
-    background-color: #d45b0a; /* Primary theme color */
+    background-color: #d45b0a; 
     color: white;
     border: none;
     border-radius: 8px;
@@ -60,6 +60,6 @@
   }
   
   .form-button:hover {
-    background-color: #b34708; /* Darker shade on hover */
+    background-color: #b34708; 
   }
   

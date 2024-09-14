@@ -26,8 +26,8 @@ function Home({ recipes, deleteRecipe, editRecipe }) {
   const handleDelete = (id) => {
     if (window.confirm('Are you sure you want to delete the recipe?')) {
       deleteRecipe(id); 
-      setFilteredRecipes(filteredRecipes.filter((recipe) => recipe.id !== id)); // Update state after deletion
-      setDropdownOpen(null); // Close the dropdown after deletion
+      setFilteredRecipes(filteredRecipes.filter((recipe) => recipe.id !== id)); 
+      setDropdownOpen(null); 
     }
   };
 
@@ -90,7 +90,7 @@ function Home({ recipes, deleteRecipe, editRecipe }) {
             {filteredRecipes.length > 0 ? (
               filteredRecipes.slice(0, 3).map((recipe) => (
                 <RecipeCard
-                  key={recipe.id} // Pass a unique key
+                  key={recipe.id} 
                   recipe={recipe}
                   onEdit={handleEdit}
                   onDelete={handleDelete}

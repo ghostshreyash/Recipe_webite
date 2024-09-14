@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
-import './CreateRecipe.css'; // Adding external CSS file for styling
+import './CreateRecipe.css'; 
 
 function CreateRecipe({ saveRecipe, editingRecipe }) {
   const [recipe, setRecipe] = useState({

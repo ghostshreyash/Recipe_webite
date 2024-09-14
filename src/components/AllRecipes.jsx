@@ -4,11 +4,16 @@ import RecipeCard from './RecipeCard';
 
 const AllRecipes = ({ recipes }) => {
   const [searchTerm, setSearchTerm] = useState('');
+  const [sortOption, setSortOption] = useState('date'); 
   const [dropdownOpen, setDropdownOpen] = useState(null);
   const navigate = useNavigate();
 
   const handleSearchChange = (e) => {
     setSearchTerm(e.target.value);
+  };
+
+  const handleSortChange = (e) => {
+    setSortOption(e.target.value);
   };
 
   const deleteRecipe = (id) => {
@@ -24,6 +29,14 @@ const AllRecipes = ({ recipes }) => {
   const handleEdit = (recipe) => {
     navigate('/create', { state: { recipe } });
   };
+
+  const sortedRecipes = [...recipes].sort((a, b) => {
+    if (sortOption === 'title') {
+      return a.title.localeCompare(b.title); 
+    } else {
+      return new Date(b.id) - new Date(a.id); 
+    }
+  });
 
   const filteredRecipes = recipes.filter((recipe) =>
     recipe.title.toLowerCase().includes(searchTerm.toLowerCase())
@@ -66,15 +79,33 @@ const AllRecipes = ({ recipes }) => {
             Create New Recipe
           </button>
         </Link>
+
+        {/* Sort Dropdown */}
+        <select
+          value={sortOption}
+          onChange={handleSortChange}
+          style={{
+            padding: '10px',
+            borderRadius: '50px',
+            border: '1px solid #ccc',
+            backgroundColor: '#fff',
+            outline: 'none',
+            fontSize: '16px',
+            marginLeft: '10px',
+          }}
+        >
+          <option value="date">Sort by Date</option>
+          <option value="title">Sort by Title</option>
+        </select>
       </div>
 
       {/* Filtered Recipe Cards */}
       <div
         className="filtered-recipe-cards"
         style={{
-          display: 'grid', // Use CSS Grid
-          gridTemplateColumns: 'repeat(3, 1fr)', // Create 3 columns in each row
-          gap: '20px', // Add gap between cards
+          display: 'grid', 
+          gridTemplateColumns: 'repeat(3, 1fr)', 
+          gap: '20px', 
           justifyContent: 'center',
           marginTop: '30px',
           width: '100%',

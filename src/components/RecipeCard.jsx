@@ -14,7 +14,7 @@ function RecipeCard({ recipe, onEdit, onDelete, onDropdownToggle, dropdownOpen }
   const navigate = useNavigate();
 
   const handleCardClick = () => {
-    navigate(`/recipe/${recipe.id}`); // Navigate to recipe details page
+    navigate(`/recipe/${recipe.id}`); 
   };
 
   return (
@@ -23,9 +23,9 @@ function RecipeCard({ recipe, onEdit, onDelete, onDropdownToggle, dropdownOpen }
         position: 'relative',
         width: 300,
         minHeight: '420px',
-        backgroundColor: '#fff8e1', // Light, warm background color
+        backgroundColor: '#fff8e1', 
         borderRadius: '20px',
-        boxShadow: '0 4px 10px rgba(0, 0, 0, 0.1)', // Soft shadow for depth
+        boxShadow: '0 4px 10px rgba(0, 0, 0, 0.1)', 
         textAlign: 'center',
         transition: 'transform 0.3s ease, box-shadow 0.3s ease',
         '&:hover': {
@@ -33,8 +33,8 @@ function RecipeCard({ recipe, onEdit, onDelete, onDropdownToggle, dropdownOpen }
           boxShadow: '0 6px 15px rgba(0, 0, 0, 0.2)',
         },
         cursor: 'pointer',
-        paddingBottom: '20px', // Ensures there's room for content at the bottom
-        paddingTop: '60px', // Allows space for the image and adjusts content downwards
+        paddingBottom: '20px', 
+        paddingTop: '60px', 
       }}
       onClick={handleCardClick}
     >
@@ -42,15 +42,15 @@ function RecipeCard({ recipe, onEdit, onDelete, onDropdownToggle, dropdownOpen }
       <CardOverflow
         sx={{
           borderRadius: '50%',
-          margin: '0 auto', // Centers the image horizontally
-          position: 'relative', // Positioned relative to card's top
-          top: '-40px', // Adjusts the image to be 20px below the top of the card
+          margin: '0 auto', 
+          position: 'relative', 
+          top: '-40px', 
           width: '120px',
           height: '120px',
           border: '5px solid white',
-          boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.1)', // Subtle shadow for the image
+          boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.1)',
           overflow: 'hidden',
-          backgroundColor: '#fff', // White background for the image circle
+          backgroundColor: '#fff', 
         }}
       >
         <AspectRatio ratio="1">
@@ -86,7 +86,7 @@ function RecipeCard({ recipe, onEdit, onDelete, onDropdownToggle, dropdownOpen }
             color: '#666',
             marginTop: '10px',
             marginBottom: '20px',
-            minHeight: '60px', // Ensure consistent card height
+            minHeight: '60px', 
             overflow: 'hidden',
             textOverflow: 'ellipsis',
             whiteSpace: 'nowrap',
@@ -105,7 +105,7 @@ function RecipeCard({ recipe, onEdit, onDelete, onDropdownToggle, dropdownOpen }
       <IconButton
         aria-label="settings"
         onClick={(e) => {
-          e.stopPropagation(); // Prevent card click when opening menu
+          e.stopPropagation(); 
           onDropdownToggle(recipe.id);
         }}
         sx={{ position: 'absolute', top: 10, right: 10 }}
