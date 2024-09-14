@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import RecipeCard from './RecipeCard';
 
 const AllRecipes = ({ recipes }) => {
   const [searchTerm, setSearchTerm] = useState('');
   const [dropdownOpen, setDropdownOpen] = useState(null);
+  const navigate = useNavigate();
 
   const handleSearchChange = (e) => {
     setSearchTerm(e.target.value);
