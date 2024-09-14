@@ -2,7 +2,7 @@
     max-width: 800px;
     margin: 40px auto;
     padding: 30px;
-    background-color: #fff8e1; 
+    background-color: #fff8e1; /* Light warm background */
     border-radius: 15px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     font-family: 'Arial', sans-serif;
@@ -19,7 +19,7 @@
   .recipe-title {
     font-size: 2rem;
     font-weight: bold;
-    color: #d45b0a; 
+    color: #d45b0a; /* Matches your theme */
   }
   
   .recipe-header-actions {
@@ -37,7 +37,7 @@
   }
   
   .edit-btn {
-    background-color: #ffc107; 
+    background-color: #ffc107; /* Warning / Edit color */
     color: white;
   }
   
@@ -46,7 +46,7 @@
   }
   
   .delete-btn {
-    background-color: #dc3545; 
+    background-color: #dc3545; /* Danger / Delete color */
     color: white;
   }
   

@@ -5,16 +5,26 @@ import CreateRecipe from './components/CreateRecipe';
 import RecipeDetails from './components/RecipeDetails';
 import Navbar from './components/Navbar';
 import AllRecipes from './components/AllRecipes';
+import LoginForm from './components/LoginForm';
+import SignupForm from './components/SignupForm';
 import "./App.css"
 
 function App() {
   const [recipes, setRecipes] = useState([]);
   const [editingRecipe, setEditingRecipe] = useState(null);
+  const [user, setUser] = useState(null); 
+  const [isAuthenticated, setIsAuthenticated] = useState(false); 
 
   useEffect(() => {
     const savedRecipes = JSON.parse(localStorage.getItem('recipes'));
     if (savedRecipes) {
       setRecipes(savedRecipes);
+    }
+
+    const loggedInUser = JSON.parse(localStorage.getItem('user'));
+    if (loggedInUser) {
+      setUser(loggedInUser);
+      setIsAuthenticated(true);
     }
   }, []);
 
@@ -42,11 +52,21 @@ function App() {
     localStorage.setItem('recipes', JSON.stringify(updatedRecipes));
   };
 
-  
+  const handleLogin = (userData) => {
+    setUser(userData);
+    setIsAuthenticated(true);
+    localStorage.setItem('user', JSON.stringify(userData)); 
+  };
+
+  const handleLogout = () => {
+    setUser(null);
+    setIsAuthenticated(false);
+    localStorage.removeItem('user'); 
+  };
 
   return (
     <Router>
-      <Navbar />
+      <Navbar user={user} onLogout={handleLogout} /> 
       <Routes>
         <Route
           path="/"
@@ -69,6 +89,14 @@ function App() {
         <Route 
           path="/recipes" 
           element={<AllRecipes recipes={recipes} />} 
+        />
+        <Route 
+          path="/login"
+          element={<LoginForm onLogin={handleLogin} />} 
+        />
+        <Route 
+          path="/signup"
+          element={<SignupForm />} 
         />
       </Routes>
     </Router>

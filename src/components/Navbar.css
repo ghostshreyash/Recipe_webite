@@ -1,13 +1,46 @@
 .container {
-    max-width: 1600px;
-    margin: 0 auto;
-    padding: 20px;
-    margin-top: 30px;
-  }
-  
-.main{
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 20px;
+  margin-top: 30px;
 }
 
+.main{
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+/* Style the login button */
+.login-button {
+background-color: #d45b0a;
+color: white;
+padding: 10px 20px;
+text-decoration: none;
+border-radius: 5px;
+font-weight: bold;
+font-size: 20px;
+border: none;
+cursor: pointer;
+}
+
+.login-button:hover {
+background-color: #d45b0ac9;
+}
+
+/* Dropdown menu styling */
+.dropdown-menu {
+box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.dropdown-menu p {
+padding: 5px;
+margin: 0;
+
+cursor: pointer;
+}
+
+.dropdown-menu p:hover {
+background-color: #e66b24;
+border-radius: 5px;
+}

@@ -48,7 +48,7 @@ function RecipeCard({ recipe, onEdit, onDelete, onDropdownToggle, dropdownOpen }
           width: '120px',
           height: '120px',
           border: '5px solid white',
-          boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.1)',
+          boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.1)', 
           overflow: 'hidden',
           backgroundColor: '#fff', 
         }}
@@ -70,7 +70,7 @@ function RecipeCard({ recipe, onEdit, onDelete, onDropdownToggle, dropdownOpen }
         </AspectRatio>
       </CardOverflow>
 
-      <CardContent sx={{ marginTop: '40px' }}> {/* Adjusted margin for text */}
+      <CardContent sx={{ marginTop: '40px' }}> 
         {/* Recipe Title */}
         <Typography
           level="h5"
