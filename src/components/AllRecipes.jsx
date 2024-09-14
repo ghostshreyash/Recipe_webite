@@ -15,11 +15,12 @@ const AllRecipes = ({ recipes }) => {
   const handleSortChange = (e) => {
     setSortOption(e.target.value);
   };
-
-  const deleteRecipe = (id) => {
-    const updatedRecipes = recipes.filter((recipe) => recipe.id !== id);
-    setRecipes(updatedRecipes);
-    localStorage.setItem('recipes', JSON.stringify(updatedRecipes));
+  const handleDelete = (id) => {
+    if (window.confirm('Are you sure you want to delete the recipe?')) {
+      deleteRecipe(id); 
+      setFilteredRecipes(filteredRecipes.filter((recipe) => recipe.id !== id)); 
+      setDropdownOpen(null);
+    }
   };
 
   const handleDropdownToggle = (id) => {
@@ -38,7 +39,7 @@ const AllRecipes = ({ recipes }) => {
     }
   });
 
-  const filteredRecipes = recipes.filter((recipe) =>
+  const filteredRecipes = sortedRecipes.filter((recipe) =>
     recipe.title.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
@@ -103,8 +104,8 @@ const AllRecipes = ({ recipes }) => {
       <div
         className="filtered-recipe-cards"
         style={{
-          display: 'grid', 
-          gridTemplateColumns: 'repeat(3, 1fr)', 
+          display: 'grid',
+          gridTemplateColumns: 'repeat(3, 1fr)',
           gap: '20px', 
           justifyContent: 'center',
           marginTop: '30px',
@@ -115,10 +116,10 @@ const AllRecipes = ({ recipes }) => {
         {filteredRecipes.length > 0 ? (
           filteredRecipes.map((recipe) => (
             <RecipeCard
-              key={recipe.id} 
+              key={recipe.id}
               recipe={recipe}
               onEdit={handleEdit}
-              onDelete={deleteRecipe}
+              onDelete={handleDelete}
               onDropdownToggle={handleDropdownToggle}
               dropdownOpen={dropdownOpen}
             />
