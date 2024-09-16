@@ -17,7 +17,7 @@
 
 /* Logo Styling */
 .logo {
-  height: 40px;
+  height: 40px; 
   transition: height 0.3s ease;
 }
 
@@ -136,6 +136,6 @@
   .dropdown-menu {
     display: flex;
     flex-direction: column;
-    width: 100%;
+    width: 100%; 
   }
 }

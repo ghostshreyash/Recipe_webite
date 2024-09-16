@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Home from './components/Home';
 import CreateRecipe from './components/CreateRecipe';
 import RecipeDetails from './components/RecipeDetails';
@@ -7,13 +7,13 @@ import Navbar from './components/Navbar';
 import AllRecipes from './components/AllRecipes';
 import LoginForm from './components/LoginForm';
 import SignupForm from './components/SignupForm';
-import "./App.css"
+import './App.css';
 
 function App() {
   const [recipes, setRecipes] = useState([]);
   const [editingRecipe, setEditingRecipe] = useState(null);
-  const [user, setUser] = useState(null); 
-  const [isAuthenticated, setIsAuthenticated] = useState(false); 
+  const [user, setUser] = useState(null);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   useEffect(() => {
     const savedRecipes = JSON.parse(localStorage.getItem('recipes'));
@@ -55,50 +55,62 @@ function App() {
   const handleLogin = (userData) => {
     setUser(userData);
     setIsAuthenticated(true);
-    localStorage.setItem('user', JSON.stringify(userData)); 
+    localStorage.setItem('user', JSON.stringify(userData));
   };
 
   const handleLogout = () => {
     setUser(null);
     setIsAuthenticated(false);
-    localStorage.removeItem('user'); 
+    localStorage.removeItem('user');
   };
 
   return (
     <Router>
-      <Navbar user={user} onLogout={handleLogout} /> 
-      <Routes>
-        <Route
-          path="/"
-          element={<Home recipes={recipes} deleteRecipe={deleteRecipe} editRecipe={editRecipe} />}
-        />
-        <Route
-          path="/create"
-          element={<CreateRecipe saveRecipe={saveRecipe} editingRecipe={editingRecipe} />}
-        />
-        <Route
-          path="/recipe/:id"
-          element={
-            <RecipeDetails
-              recipes={recipes}
-              deleteRecipe={deleteRecipe}
-              editRecipe={editRecipe}
+      {isAuthenticated ? (
+        <>
+          <Navbar user={user} onLogout={handleLogout} />
+          <Routes>
+            <Route
+              path="/"
+              element={
+                <Home
+                  recipes={recipes}
+                  deleteRecipe={deleteRecipe}
+                  editRecipe={editRecipe}
+                />
+              }
             />
-          }
-        />
-        <Route 
-          path="/recipes" 
-          element={<AllRecipes recipes={recipes} />} 
-        />
-        <Route 
-          path="/login"
-          element={<LoginForm onLogin={handleLogin} />} 
-        />
-        <Route 
-          path="/signup"
-          element={<SignupForm />} 
-        />
-      </Routes>
+            <Route
+              path="/create"
+              element={<CreateRecipe saveRecipe={saveRecipe} editingRecipe={editingRecipe} />}
+            />
+            <Route
+              path="/recipe/:id"
+              element={
+                <RecipeDetails
+                  recipes={recipes}
+                  deleteRecipe={deleteRecipe}
+                  editRecipe={editRecipe}
+                />
+              }
+            />
+            <Route path="/recipes" element={<AllRecipes recipes={recipes} />} />
+            <Route path="*" element={<Navigate to="/" />} /> {/* Redirect unknown routes to home */}
+          </Routes>
+        </>
+      ) : (
+        <Routes>
+          <Route
+            path="/login"
+            element={<LoginForm onLogin={handleLogin} />}
+          />
+          <Route
+            path="/signup"
+            element={<SignupForm />}
+          />
+          <Route path="*" element={<Navigate to="/login" />} /> {/* Redirect unknown routes to login */}
+        </Routes>
+      )}
     </Router>
   );
 }

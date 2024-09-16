@@ -49,7 +49,7 @@
   /* Recipe Cards Layout */
   .filtered-recipe-cards {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(3, 1fr); 
     gap: 20px;
     justify-content: center; 
     justify-items: center; 
@@ -116,7 +116,7 @@
     }
   
     .recipe-card {
-      max-height: 300px;
+      max-height: 300px; 
     }
   
     .recipe-card img {
