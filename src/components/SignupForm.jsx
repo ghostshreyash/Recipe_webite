@@ -1,37 +1,42 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useFormik } from 'formik';
 import { Link } from "react-router-dom";
 import * as Yup from 'yup';
 import './Auth.css';
 
-function SignUpForm({ onSwitch }) {
-  const { values, handleBlur, handleChange, touched, errors, handleSubmit} = useFormik({
+function SignupForm() {
+  const [usernameTaken, setUsernameTaken] = useState(false);
+
+  const { values, handleChange, handleBlur, touched, errors, handleSubmit } = useFormik({
     initialValues: {
       email: '',
-      password: '',
-      confirmPassword: '',
-      username: ''
+      username: '',
+      password: ''
     },
     validationSchema: Yup.object({
       email: Yup.string().email('Invalid email address').required('Required'),
-      password: Yup.string().min(8, 'Password must be at least 8 characters').required('Required'),
-      confirmPassword: Yup.string()
-        .oneOf([Yup.ref('password'), null], 'Passwords must match')
-        .required('Required'),
       username: Yup.string().required('Required'),
+      password: Yup.string().min(6, 'Password must be at least 6 characters').required('Required')
     }),
-    onSubmit: async (values,actions) => {
-      console.log('Sign-Up Form Data:', values);
-      await new Promise((resolve) =>  setTimeout(resolve,1000));
-      actions.resetForm();
-    },
+    onSubmit: (values) => {
+      const existingUsers = JSON.parse(localStorage.getItem('users')) || [];
+      const isUsernameTaken = existingUsers.some(user => user.username === values.username);
+
+      if (isUsernameTaken) {
+        setUsernameTaken(true);
+      } else {
+        const newUser = { username: values.username, email: values.email, password: values.password };
+        const updatedUsers = [...existingUsers, newUser];
+        localStorage.setItem('users', JSON.stringify(updatedUsers));
+        alert('Sign up successful! You can now log in.');
+      }
+    }
   });
 
   return (
     <div className="auth-container">
       <form onSubmit={handleSubmit} className="auth-form">
         <h2>Sign Up</h2>
-
         <label>Username:</label>
         <input
           type="text"
@@ -41,7 +46,8 @@ function SignUpForm({ onSwitch }) {
           value={values.username}
           className="auth-input"
         />
-        {touched.username && errors.username && <div className="form-error">{errors.username}</div>}
+        {touched.username && errors.username && <p className="form-error">{errors.username}</p>}
+        {usernameTaken && <p className="form-error">Username is already taken</p>}
 
         <label>Email:</label>
         <input
@@ -52,9 +58,7 @@ function SignUpForm({ onSwitch }) {
           value={values.email}
           className="auth-input"
         />
-        {touched.email && errors.email ? (
-          <div className="form-error">{errors.email}</div>
-        ) : null}
+        {touched.email && errors.email && <p className="form-error">{errors.email}</p>}
 
         <label>Password:</label>
         <input
@@ -65,25 +69,10 @@ function SignUpForm({ onSwitch }) {
           value={values.password}
           className="auth-input"
         />
-        {touched.password && errors.password ? (
-          <div className="form-error">{errors.password}</div>
-        ) : null}
-
-        <label>Confirm Password:</label>
-        <input
-          type="password"
-          name="confirmPassword"
-          onChange={handleChange}
-          onBlur={handleBlur}
-          value={values.confirmPassword}
-          className="auth-input"
-        />
-        {touched.confirmPassword && errors.confirmPassword ? (
-          <div className="form-error">{errors.confirmPassword}</div>
-        ) : null}
+        {touched.password && errors.password && <p className="form-error">{errors.password}</p>}
 
         <button type="submit" className="auth-button">Sign Up</button>
-
+      
         <p className="switch-form">
           Already have an account?{' '}
           <Link to="/login" className="switch-link">Login here</Link>
@@ -93,4 +82,4 @@ function SignUpForm({ onSwitch }) {
   );
 }
 
-export default SignUpForm;
+export default SignupForm;

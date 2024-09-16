@@ -7,18 +7,26 @@ import './Auth.css';
 function LoginForm({ onLogin }) {
   const { values, handleChange, handleBlur, touched, errors, handleSubmit } = useFormik({
     initialValues: {
-      email: '',
-      password: '',
-      username: ''
+      emailOrUsername: '',
+      password: ''
     },
     validationSchema: Yup.object({
-      email: Yup.string().email('Invalid email address').required('Required'),
-      password: Yup.string().min(6, 'Password must be at least 6 characters').required('Required'),
-      username: Yup.string().required('Required')
+      emailOrUsername: Yup.string().required('Username or Email is required'),
+      password: Yup.string().min(6, 'Password must be at least 6 characters').required('Required')
     }),
     onSubmit: (values) => {
-      // Simulate login
-      onLogin(values);
+      const existingUsers = JSON.parse(localStorage.getItem('users')) || [];
+
+      const matchedUser = existingUsers.find(user => 
+        (user.username === values.emailOrUsername || user.email === values.emailOrUsername) &&
+        user.password === values.password
+      );
+
+      if (matchedUser) {
+        onLogin(matchedUser);
+      } else {
+        alert('Invalid credentials');
+      }
     },
   });
 
@@ -26,27 +34,16 @@ function LoginForm({ onLogin }) {
     <div className="auth-container">
       <form onSubmit={handleSubmit} className="auth-form">
         <h2>Login</h2>
-        <label>Username:</label>
+        <label>Email or Username:</label>
         <input
           type="text"
-          name="username"
+          name="emailOrUsername"
           onChange={handleChange}
           onBlur={handleBlur}
-          value={values.username}
+          value={values.emailOrUsername}
           className="auth-input"
         />
-        {touched.username && errors.username && <p className="form-error">{errors.username}</p>}
-        
-        <label>Email:</label>
-        <input
-          type="email"
-          name="email"
-          onChange={handleChange}
-          onBlur={handleBlur}
-          value={values.email}
-          className="auth-input"
-        />
-        {touched.email && errors.email && <p className="form-error">{errors.email}</p>}
+        {touched.emailOrUsername && errors.emailOrUsername && <p className="form-error">{errors.emailOrUsername}</p>}
         
         <label>Password:</label>
         <input
@@ -58,7 +55,7 @@ function LoginForm({ onLogin }) {
           className="auth-input"
         />
         {touched.password && errors.password && <p className="form-error">{errors.password}</p>}
-        
+
         <button type="submit" className="auth-button">Login</button>
 
         <p className="switch-form">
