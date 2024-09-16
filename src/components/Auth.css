@@ -1,62 +1,61 @@
 .auth-container {
-    max-width: 400px;
-    margin: 40px auto;
-    padding: 30px;
-    background-color: #fff8e1; 
-    border-radius: 10px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    font-family: 'Arial', sans-serif;
-  }
-  
-  .auth-form h2 {
-    text-align: center;
-    color: #d45b0a;
-    font-size: 1.8rem;
-    margin-bottom: 20px;
-  }
-  
-  .auth-input {
-    width: 100%;
-    padding: 12px;
-    margin-bottom: 20px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-    outline: none;
-    font-size: 1rem;
-  }
-  
-  .auth-input:focus {
-    border-color: #d45b0a;
-  }
-  
-  .auth-button {
-    width: 100%;
-    padding: 12px;
-    font-size: 1rem;
-    background-color: #d45b0a;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-  }
-  
-  .auth-button:hover {
-    background-color: #b34708;
-  }
-  
-  .switch-form {
-    text-align: center;
-    margin-top: 20px;
-    color: #666;
-  }
-  
-  .switch-link {
-    color: #d45b0a;
-    cursor: pointer;
-    text-decoration: underline;
-  }
-  
-  .switch-link:hover {
-    color: #b34708;
-  }
-  
+  max-width: 400px;
+  margin: 40px auto;
+  padding: 30px;
+  background-color: #fff8e1; /* Light warm background */
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  font-family: 'Arial', sans-serif;
+}
+
+.auth-form h2 {
+  text-align: center;
+  color: #d45b0a;
+  font-size: 1.8rem;
+  margin-bottom: 20px;
+}
+
+.auth-input {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 20px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  outline: none;
+  font-size: 1rem;
+}
+
+.auth-input:focus {
+  border-color: #d45b0a;
+}
+
+.auth-button {
+  width: 100%;
+  padding: 12px;
+  font-size: 1rem;
+  background-color: #d45b0a;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.auth-button:hover {
+  background-color: #b34708;
+}
+
+.switch-form {
+  text-align: center;
+  margin-top: 20px;
+  color: #666;
+}
+
+.switch-link {
+  color: #d45b0a;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.switch-link:hover {
+  color: #b34708;
+}

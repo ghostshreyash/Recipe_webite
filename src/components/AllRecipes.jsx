@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import RecipeCard from './RecipeCard';
+import "./AllRecipes.css";
 
 const AllRecipes = ({ recipes }) => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -15,6 +16,7 @@ const AllRecipes = ({ recipes }) => {
   const handleSortChange = (e) => {
     setSortOption(e.target.value);
   };
+
   const handleDelete = (id) => {
     if (window.confirm('Are you sure you want to delete the recipe?')) {
       deleteRecipe(id); 
@@ -48,35 +50,16 @@ const AllRecipes = ({ recipes }) => {
       <h1>All Recipes</h1>
 
       {/* Search bar and Create Button */}
-      <div className="search-create-bar" style={{ display: 'flex', gap: '20px', justifyContent: 'center', marginTop: '50px', width: '100%' }}>
+      <div className="search-create-bar">
         <input
           type="text"
           placeholder="Search recipes..."
           value={searchTerm}
           onChange={handleSearchChange}
-          style={{
-            flex: 1,
-            padding: '10px 20px',
-            borderRadius: '50px',
-            backgroundColor: '#D9D9D9',
-            border: 'none',
-            outline: 'none',
-            fontSize: '16px',
-          }}
+          className="search-input"
         />
         <Link to="/create">
-          <button
-            style={{
-              padding: '10px 20px',
-              borderRadius: '50px',
-              backgroundColor: '#d45b0a',
-              color: 'white',
-              border: 'none',
-              cursor: 'pointer',
-              fontSize: '16px',
-              flex: 1,
-            }}
-          >
+          <button className="create-btn">
             Create New Recipe
           </button>
         </Link>
@@ -85,15 +68,7 @@ const AllRecipes = ({ recipes }) => {
         <select
           value={sortOption}
           onChange={handleSortChange}
-          style={{
-            padding: '10px',
-            borderRadius: '50px',
-            border: '1px solid #ccc',
-            backgroundColor: '#fff',
-            outline: 'none',
-            fontSize: '16px',
-            marginLeft: '10px',
-          }}
+          className="sort-select"
         >
           <option value="date">Sort by Date</option>
           <option value="title">Sort by Title</option>
@@ -101,33 +76,22 @@ const AllRecipes = ({ recipes }) => {
       </div>
 
       {/* Filtered Recipe Cards */}
-      <div
-        className="filtered-recipe-cards"
-        style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(3, 1fr)',
-          gap: '20px', 
-          justifyContent: 'center',
-          marginTop: '30px',
-          width: '100%',
-          padding: '10px',
-        }}
-      >
-        {filteredRecipes.length > 0 ? (
-          filteredRecipes.map((recipe) => (
-            <RecipeCard
-              key={recipe.id}
-              recipe={recipe}
-              onEdit={handleEdit}
-              onDelete={handleDelete}
-              onDropdownToggle={handleDropdownToggle}
-              dropdownOpen={dropdownOpen}
-            />
-          ))
-        ) : (
-          <p>No recipes found!</p>
-        )}
-      </div>
+      <div className="recipe-cards">
+          {filteredRecipes.length > 0 ? (
+            filteredRecipes.map((recipe) => (
+              <RecipeCard
+                key={recipe.id}
+                recipe={recipe}
+                onEdit={handleEdit}
+                onDelete={handleDelete}
+                onDropdownToggle={handleDropdownToggle}
+                dropdownOpen={dropdownOpen}
+              />
+            ))
+          ) : (
+            <p>No recipes found!</p>
+          )}
+        </div>
     </div>
   );
 };
